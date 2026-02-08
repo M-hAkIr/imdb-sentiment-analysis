@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.egg
+build/
+dist/
+
+# Virtual Environments
+.venv/
+venv/
+.env
+.env.local
+
+# UV
+.uv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Models & Cache
+.cache/
+models/
+*.pth
+*.bin
+*.onnx
