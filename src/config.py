@@ -50,7 +50,10 @@ CORS_ALLOW_ORIGINS = os.getenv(
 ).split(",")
 CORS_ALLOW_CREDENTIALS = os.getenv("CORS_ALLOW_CREDENTIALS", "false").lower() == "true"
 
-
+# Demo
+DEMO_HOST = os.getenv("DEMO_HOST", "0.0.0.0")
+DEMO_PORT = int(os.getenv("DEMO_PORT", "7860"))
+DEMO_SHARE = os.getenv("DEMO_SHARE", "false").lower() == "true"
 
 def ensure_directories():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
