@@ -11,8 +11,10 @@ class Sentiment(StrEnum):
 LABEL_MAPPING: dict[str, Sentiment] = {
     "POSITIVE": Sentiment.POSITIVE,
     "POS": Sentiment.POSITIVE,
+    "LABEL_1": Sentiment.POSITIVE,
     "NEGATIVE": Sentiment.NEGATIVE,
     "NEG": Sentiment.NEGATIVE,
+    "LABEL_0": Sentiment.NEGATIVE,
 }
 
 # Text limits
@@ -30,7 +32,7 @@ OUTPUT_DIR = PROJECT_ROOT / "outputs"
 # Models
 MODELS: dict[str, str] = {
     "distilbert": "distilbert-base-uncased-finetuned-sst-2-english",
-    "roberta": "siebert/sentiment-roberta-large-english",
+    "roberta": "textattack/roberta-base-SST-2",
 }
 DEFAULT_MODEL = "distilbert"
 

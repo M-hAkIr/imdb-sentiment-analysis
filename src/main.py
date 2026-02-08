@@ -12,7 +12,7 @@ from src.config import (
     OUTPUT_DIR,
     ensure_directories,
 )
-from src.models import PredictionResult, create_analyzer
+from src.models import PredictionResult, create_analyzer, normalize_label
 from src.preprocessing import load_data, preprocess_dataset
 
 logging.basicConfig(
@@ -63,7 +63,7 @@ def save_predictions(df: pd.DataFrame, predictions: list[PredictionResult],
     output_df = pd.DataFrame({
         'review': df['cleaned_review'],
         'true_sentiment': df['sentiment'],
-        'predicted_sentiment': [p.label.lower() for p in predictions],
+        'predicted_sentiment': [normalize_label(p.label).value for p in predictions],
         'confidence': [p.confidence for p in predictions],
         'avg_inference_time_ms': [p.inference_time * 1000 for p in predictions],
     })

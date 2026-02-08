@@ -99,10 +99,17 @@ async def root():
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
-    return HealthResponse(
-        status="healthy" if models else "unhealthy",
+    healthy = bool(models)
+    response = HealthResponse(
+        status="healthy" if healthy else "unhealthy",
         models_loaded=list(models.keys()),
     )
+    if not healthy:
+        return JSONResponse(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            content=response.model_dump(),
+        )
+    return response
 
 
 @app.post("/predict", response_model=PredictionResponse)
