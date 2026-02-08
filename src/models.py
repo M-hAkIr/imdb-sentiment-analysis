@@ -18,6 +18,14 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True, slots=True)
 class PredictionResult:
+    """Single sentiment prediction result.
+
+    ``inference_time`` stores per-item wall-clock seconds. For single
+    predictions this is the measured latency; for batch predictions it is
+    the amortized time (total batch time / N) because batched forward
+    passes process all items together.
+    """
+
     text: str
     label: str
     confidence: float
@@ -94,6 +102,8 @@ class SentimentAnalyzer:
             start = time.perf_counter()
             results = self.pipeline(texts, batch_size=batch_size)
             total_time = time.perf_counter() - start
+            # Amortize: batched inference runs a single forward pass,
+            # so per-item wall-clock time is total / N.
             avg_time = total_time / len(texts)
 
             logger.info(
