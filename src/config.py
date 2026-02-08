@@ -20,6 +20,7 @@ MIN_TEXT_LENGTH = 5
 MAX_TEXT_LENGTH = 5000
 DEFAULT_BATCH_SIZE = 8
 MAX_TOKEN_LENGTH = 512
+TEXT_TRUNCATE_LENGTH = 100
 
 # Paths
 PROJECT_ROOT = Path(__file__).parent.parent.absolute()
@@ -40,6 +41,15 @@ BATCH_SIZE = int(os.getenv("BATCH_SIZE", str(DEFAULT_BATCH_SIZE)))
 DATA_FILE = DATA_DIR / "IMDB-movie-reviews.csv"
 CSV_ENCODING = "ISO-8859-1"
 CSV_DELIMITER = ";"
+
+# API
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", "8000"))
+CORS_ALLOW_ORIGINS = os.getenv(
+    "CORS_ALLOW_ORIGINS", "http://localhost:3000,http://localhost:7860"
+).split(",")
+CORS_ALLOW_CREDENTIALS = os.getenv("CORS_ALLOW_CREDENTIALS", "false").lower() == "true"
+
 
 
 def ensure_directories():
